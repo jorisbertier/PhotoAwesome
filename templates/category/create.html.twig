@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Create category Controller!{% endblock %}
+
+{% block body %}
+<h1>Ajout des categories</h1>
+{{ form_start(form) }}
+    {{ form_row(form.label) }}
+    <button type="submit"> valider le formulaire</button>
+{{ form_end(form) }}
+{% endblock %}

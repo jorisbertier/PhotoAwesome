@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MediaController!{% endblock %}
+
+{% block body %}
+{# ... autres éléments du template ... #}
+{{ form_start(form) }}
+    {{ form_row(form.mediaTitle) }}
+    {{ form_row(form.userEmail) }}
+    {{ form_row(form.searchDate) }}
+    <button type="submit">Rechercher</button>
+{{ form_end(form) }}
+{# Affichage du formulaire de recherche avancée #}
+
+{# ... autres éléments du template ... #}
+    <h1>Media index</h1>
+
+    <table class="table">
+        <h3>Nombre total : {{ medias.totalItemCount }}</h3>
+        <thead>
+            <tr>
+                <th>Slug</th>
+                <th>Description</th>
+                <th>Date de Cration</th>
+                <th>Commenatires</th>
+                <th>Commenatires</th>
+            </tr>
+        </thead>
+        <tbody>
+      {% for media in medias %}
+            <tr>
+                <td>{{ media.slug }}</td>
+                <td>{{ media.description }}</td>
+                <td>Créer par {{ media.user.email }}, le {{ media.createAt|date('d-m-Y') }} à {{ media.createAt|date('h:m:s') }} </td>
+                <td>Nombre total de commentaire: {{ media.comments|length }}</td>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation">
+        {{ knp_pagination_render(medias) }}
+    </div>
+
+
+</div>
+{% endblock %}

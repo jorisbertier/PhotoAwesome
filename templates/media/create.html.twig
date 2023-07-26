@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Create Media Controller!{% endblock %}
+
+{% block body %}
+<h1>Create media</h1>
+{{ form_start(form) }}
+    {{ form_row(form.filePath) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.slug) }}
+    {{ form_row(form.categories) }}
+    <button type="submit"> valider le formulaire</button>
+{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,13 @@
+<div>
+{% if app.user %}
+<a href="{{ path('app_logout') }}"><button type="text">Se deconnecter</button></a>
+{% if is_granted('ROLE_ADMIN')%}
+<a href="{{ path('app_admin') }}">Administrateur</a>
+{% endif %}
+{#   Je suis connecter#}
+{% else %}
+<a href="{{ path('app_login') }}"><button type="text">Se connecter</button></a>
+<a href="{{ path('app_register') }}"><button type="text">S'enregistrer</button></a>
+{#   Je ne suis pas connecter#}
+{% endif %}
+</div>

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+
+    <h1> Liste des catégories</h1>
+
+    <ul> 
+       <li> {{ category.label }}</li>
+    </ul>
+
+        <ul> 
+            {% for media in category.medias %}
+             <li> {{ media.slug }}</a>, créer par {{ media.user.email}}, le {{ media.createAt | date('y/m/d H:i:s')}} </li>
+            
+            {% endfor %}
+             <li><a href="{{ path('app_delete', {'id': category.id}) }}"> Delete</a></li>
+        </ul>
+
+
+
+
+{% endblock %}
