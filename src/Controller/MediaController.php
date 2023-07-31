@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/media')]
 class MediaController extends AbstractController
@@ -64,26 +65,34 @@ class MediaController extends AbstractController
     }
 
     #[Route('/create', name: 'app_media_create')]
-    public function create(Request $request): Response
+    public function create(Request $request, SluggerInterface $slugger): Response
     {
 
         $user = $this->getUser();
 
         if($user === null){
-            return $this->redirectToRoute('app_media');
+            return $this->redirectToRoute('app_media');    // annotion de secutite équivalent a isGtranted
         }
 
         $media = new Media();
-        $media->setCreateAt(new \DateTime());
-        $user = $this->getUser();
-        $media->setUser($user);
+        $media->setCreateAt(new \DateTime());  // set date du jour
+
+        /**
+         * récupere l'utiliateur connecté
+         * Soit une entité User (si connecté)
+         * Soit null (si pas connecté)
+         */
+        $user = $this->getUser();     // récuperation de l'user connecté
+        $media->setUser($user);       // et tu set l utilisateur connecté
 
 
-        $form = $this->createForm(MediaType::class, $media);
-        $form->handleRequest($request);
+        $form = $this->createForm(MediaType::class, $media);    // créer le form
+        $form->handleRequest($request);                        // traite la requete en utilisant les données soumises par l'utilisateur    
 
         if($form->isSubmitted() && $form->isValid()){
 
+            // $slug = $slugger->slug($media->getTitle()); //ici cela ne marhe pas car je n'ai pas de totre ds media, c un oublie de ma part
+            // $media->setSlug($slug);
             $this->entityManager->persist($media);
             $this->entityManager->flush();
 

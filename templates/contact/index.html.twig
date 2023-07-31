@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+{{ form_start(form) }}
+
+{% for message in app.flashes('success') %}
+{{ message }}
+{% endfor %}
+<button type="submit"> valider le formulaire</button>
+{{ form_end(form) }}
+
+{% endblock %}

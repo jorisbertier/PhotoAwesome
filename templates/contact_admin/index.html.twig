@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactAdminController!{% endblock %}
+
+{% block body %}
+
+
+{% if form is not empty %}
+    <ul>     
+        {% for contact in form %}
+            <li>
+                id: {{ contact.id }}<br>
+                Email: {{ contact.email }}<br>
+                Message: {{ contact.message }}<br>
+                Message: {{ contact.status }}<br>
+                Date: {{ contact.createdAt|date('d-m-Y') }}<br>
+                <a href="{{ path('app_login')}}">Marquer lu</a>
+                
+            </li>       
+            
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Aucun contact trouvé.</p>
+{% endif %}
+{% endblock %}
