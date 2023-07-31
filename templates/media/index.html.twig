@@ -32,6 +32,7 @@
                 <td>{{ media.slug }}</td>
                 <td>{{ media.description }}</td>
                 <td>Créer par {{ media.user.email }}, le {{ media.createAt|date('d-m-Y') }} à {{ media.createAt|date('h:m:s') }} </td>
+                <td>Price : {{ media.price|euro }} </td>
                 <td>Nombre total de commentaire: {{ media.comments|length }}</td>
         {% else %}
             <tr>

@@ -1,6 +1,13 @@
 <div>
 {% if app.user %}
+{% set medias = get_last_five_media() %}
+{% for media in medias %}
+<p>{{ media.slug }}</p>
+{% endfor %}
+
+{% dump(medias) %}
 <a href="{{ path('app_logout') }}"><button type="text">Se deconnecter</button></a>
+
 {% if is_granted('ROLE_ADMIN')%}
 <a href="{{ path('app_admin') }}">Administrateur</a>
 {% endif %}
